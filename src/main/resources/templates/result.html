@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+      <!-- DB表示 -->
+     <table border="1">
+        <tr>
+            <th>題名</th>
+            <th>説明</th>
+            <th>作成日</th>
+        </tr>
+        <tr th:each="emp : ${list}">
+            <!-- <td th:text="${emp.title}" th:href='./shokai'></td> -->
+            <td th:text="${emp.text}"></td>
+            <td th:text="${#dates.format(emp.registDt, 'yyyy/MM/dd')}"></td>
+        </tr>
+    </table>
+</body>
+</html>

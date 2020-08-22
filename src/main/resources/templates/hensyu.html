@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>編集</title>
+    <link rel="stylesheet" media="all" th:href="@{/css/style.css}"/>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <meta charset="utf-8" />
+    <!-- サブウィンドウスクリプト -->
+    <script type="text/javascript">
+     var parantExistanceFlag = true;
+
+     function clickFire(){
+
+     //ウィンドウオブジェクトが存在していない時警告してフラグをfalseに
+     if ( !window.opener || !Object.keys(window.opener).length ) {
+        window.alert('親画面が存在しません')
+        parantExistanceFlag = false;
+     }
+
+     //親画面に値を挿入
+     window.opener.document.getElementById("s_status").value = document.getElementById("h_status").value
+     window.opener.document.getElementById("s_daimei").value = document.getElementById("h_daimei").value
+     window.opener.document.getElementById("s_setsumei").value = document.getElementById("h_setsumei").value
+     window.opener.document.getElementById("s_file").value = document.getElementById("h_file").value
+     window.opener.document.getElementById("s_tantou").value = document.getElementById("h_tantou").value
+     window.opener.document.getElementById("s_kousuu").value = document.getElementById("h_kousuu").value
+
+     window.close();
+    }
+    </script>
+    <!-- end -->
+  </head>
+  <body>
+  <!----- ヘッダー ----->
+    <header>
+     <p>Header</p>
+    </header>
+  <!----- ヘッダー END ----->
+
+  <!-- 担当者検索（サブウィンドウ） -->
+     <h2>編集</h2>
+<form action="#" th:action="@{/hensyu}" th:object="${ticket}">
+     <!-- TODO -->
+     <p>ステータス：<select id="h_status" name="status" th:field="*{status}">
+                   <option value="新規">新規</option>
+                   <option value="作業中">作業中</option>
+                   <option value="完了">完了</option>
+                    </select>
+     <p>題名：<input style="width:95%" id="h_daimei" type="text" th:field="*{title}"/></p>
+     <p>説明：<textarea  style="width:100%" id="h_setsumei" name="comment" th:field="*{text}" cols="40" rows="5"></textarea></p>
+     <p>ファイル：<input id="h_file" type="file" name="fl01"></p>
+     <p>担当者：<input id="h_tantou" type="text" th:field="*{tanto}" /></p>
+     <p>予定工数： <input type="text" id="h_kousuu" name="kousuu" th:field="*{kosu}" value="" size="24"></p>
+</form>
+
+  <!-- サブウィンドウを閉じる -->
+     <input class="btn" name="Button" type="button" value="決定" onClick='clickFire()'/>
+
+  <!-- フッター -->
+  <footer>
+    <p>footer</p>
+  </footer>
+  <!-- フッター END -->
+
+  </body>
+
+</html>

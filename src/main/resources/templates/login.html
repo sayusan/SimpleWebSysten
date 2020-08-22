@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>ログイン</title>
+    <link rel="stylesheet" media="all" th:href="@{/css/style.css}"/>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <meta charset="utf-8" />
+  </head>
+  <body>
+  <!----- ヘッダー ----->
+    <header>
+     <p>ぽよぽよ</p>
+    </header>
+  <!----- ヘッダー END ----->
+
+  <!-- ログイン -->
+     <h2>login</h2>
+     <div align="center">
+     <form action="#" th:action="@{/main}" th:object="${syain}" method="post">
+         <table border="1">
+            <tr>
+               <th>
+                 <i class="fa fa-user" aria-hidden="true"></i> ID
+               </th>
+               <td>
+                  <input type="text" th:field="*{id}" size="24" />
+               </td>
+            </tr>
+            <tr>
+               <th>
+                  <i class="fa fa-lock" aria-hidden="true"></i> Password
+               </th>
+               <td>
+                 <input type="password" th:field="*{pass}" size="24">
+               </td>
+            </tr>
+            <tr>
+               <td colspan="2">
+               <!-- <input type="button" onclick="location.href='./main'" value="ログイン" class="btn"> -->
+                  <button onclick="http://localhost:8080/main"><i class="fa fa-sign-in" aria-hidden="true"></i> LOGIN</button>
+               </td>
+            </tr>
+          </table>
+     </form>
+      </div>
+
+
+  <!-- フッター -->
+  <footer>
+    <p>©ぷりぷり</p>
+  </footer>
+  <!-- フッター END -->
+
+  </body>
+
+</html>

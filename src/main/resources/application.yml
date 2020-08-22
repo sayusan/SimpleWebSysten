@@ -1,0 +1,22 @@
+
+server: 
+  port: 8080
+
+spring: 
+  datasource: 
+    platform: postgres
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://10.3.1.89:5432/team3
+    username: team3
+    password: team3!
+
+mybatis:
+  mapper-locations:
+    classpath*:/mapper/table/*.xml
+
+logging:
+  level:
+    org:
+      springframework: WARN
+    com:
+      qdenbs: DEBUG

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>担当者検索</title>
+    <link rel="stylesheet" media="all" th:href="@{/css/style.css}"/>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <meta charset="utf-8" />
+    <script type="text/javascript">
+    <!--
+     var parantExistanceFlag = true;
+
+     function clickFire(){
+
+     //ウィンドウオブジェクトが存在していない時警告してフラグをfalseに
+     if ( !window.opener || !Object.keys(window.opener).length ) {
+        window.alert('親画面が存在しません')
+        parantExistanceFlag = false;
+     }
+
+     //親画面に値を挿入
+     if(parantExistanceFlag){
+     window.opener.document.getElementById("daimei").value = document.getElementById("searchCode").value;
+     }
+
+     window.close();
+    }
+
+    -->
+    </script>
+  </head>
+  <body>
+  <!----- ヘッダー ----->
+    <header>
+     <p>Header</p>
+    </header>
+  <!----- ヘッダー END ----->
+
+  <!-- 担当者検索（サブウィンドウ） -->
+    <h2>担当者検索</h2>
+    <input id="searchCode" type="text" />
+  <!-- サブウィンドウを閉じる -->
+    <input class="btn" name="Button" type="button" value="決定" onClick='clickFire()'/>
+
+  <!-- フッター -->
+  <footer>
+    <p>footer</p>
+  </footer>
+  <!-- フッター END -->
+
+  </body>
+
+</html>

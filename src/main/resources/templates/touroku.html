@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>登録</title>
+    <link rel="stylesheet" media="all" th:href="@{/css/style.css}"/>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <meta charset="utf-8" />
+
+    <!-- サブ画面を開くためのスクリプト -->
+    <!--
+    <script type ="text/javascript">
+  function disp(url){
+    window.open(url, "サブ検索画面", "width=300,height=200,scrollbars=yes");
+    }
+    </script>
+    -->
+
+    <!-- 登録判断スクリプト -->
+    <script type="text/javascript">
+    function MoveCheck() {
+        var res = confirm("登録しますか？");
+        if( res == true ) {
+            // OKなら移動
+            window.location.href ="http://localhost:8080/shinki";
+        }
+        else {
+            // キャンセルならアラートボックスを表示
+            alert("キャンセルしました。");
+        }
+    }
+    </script>
+
+  </head>
+  <body>
+  <!----- ヘッダー ----->
+    <header>
+          <button onclick="location.href='./main'"><i class="fa fa-home" aria-hidden="true"></i> メニューへ戻る</button>
+          <button onclick="location.href='./login'"><i class="fa fa-sign-out" aria-hidden="true"></i> ログアウト</button>
+    </header>
+  <!----- ヘッダー END ----->
+
+  <!-- 検索/一覧に戻る -->
+   <div class="top-rapper">
+     <button onclick="location.href='./search'"><i class="fa fa-chevron-left" aria-hidden="true"></i> 戻る</button>
+   </div>
+
+  <!-- 登録画面 -->
+     <h2>チケット登録</h2>
+     <div class="container">
+        <form th:action="@{/shinki}" th:object="${ticketBean}" method="POST" enctype="multipart/form-data">
+
+        <!-- 登録情報 -->
+           <p><label><i class="fa fa-tasks" aria-hidden="true"></i> ステータス：</label>
+              <!-- <input type="text" th:field="*{status}" /> -->
+              <select th:field=*{status}>
+                 <option value="新規">新規</option>
+                 <option value="作業中">作業中</option>
+                 <option value="完了">完了</option>
+              </select>
+           </p>
+           <p style="color:red;" th:errors="${ticketBean.title}" class="error">「題名」の入力チェック</p>
+           <p><label><i class="fa fa-lemon-o" aria-hidden="true"></i> 題名：</label>
+              <input type="text" style="width:95%" th:field="*{title}" size="24">
+           </p>
+        <p style="color:red;" th:errors="${ticketBean.text}" class="error">「説明」の入力チェック</p>
+        <p><i class="fa fa-comment" aria-hidden="true"></i> 説明<br>
+           <textarea style="width:100%" th:field=*{text} cols="40" rows="5"></textarea>
+        </p>
+        <p><label><i class="fa fa-file" aria-hidden="true"></i> ファイル選択：</label>
+           <input type="file" name="file">
+        </p>
+           <!-- <p style="color:red;" th:errors="${ticketBean.tanto}" class="error">「担当者」の入力チェック</p> -->
+        <p><label><i class="fa fa-user" aria-hidden="true"></i> 担当者：</label>
+           <select style="width:20%" class="form-control" th:field=*{tanto}>
+              <option th:each="syain: ${tanto}"
+                 th:value="${syain.shimei}"
+                 th:inline="text">[[${syain.shimei}]]</option>
+           </select>
+            <!-- 検索ボタンクリックで担当者を検索するサブ画面を開く -->
+            <!-- <button onclick='disp("http://localhost:8080/tantou_search")'><i class="fa fa-search" aria-hidden="true"></i> 検索</button> -->
+
+        <p style="color:red;" th:errors="${ticketBean.kosu}" class="error">「工数」の入力チェック</p>
+        <p><label><i class="fa fa-wrench" aria-hidden="true"></i> 予定工数：</label>
+           <input type="text" th:field=*{kosu} size="24">
+        </p>
+
+        <!-- 登録情報END -->
+
+   <!-- 登録確認ダイアログ表示 -->
+        <div align="right">
+           <button type="submit" onclick="MoveCheck();"><i class="fa fa-plus" aria-hidden="true"></i> 登録</button>
+           <!-- <button type="submit" onclick="location.href='./shinki'"><i class="fa fa-plus" aria-hidden="true"></i> 登録</button> -->
+        </div>
+     </form>
+   </div>
+   <!-- 登録画面END -->
+
+
+  <!-- フッター -->
+  <footer>
+    <p>©ぴよぴよ</p>
+  </footer>
+  <!-- フッター END -->
+
+  </body>
+</html>

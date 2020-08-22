@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" media="all" th:href="@{/css/search.css}"/>
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+<head>
+<meta charset="UTF-8">
+<title>検索／一覧</title>
+</head>
+<body>
+  <!----- ヘッダー ----->
+    <header>
+        <div class="header-right">
+          <button onclick="location.href='./main'"><i class="fa fa-home" aria-hidden="true"></i> メニューへ戻る</button>
+          <button onclick="location.href='./login'"><i class="fa fa-sign-out" aria-hidden="true"></i> ログアウト</button>
+        </div>
+    </header>
+  <!----- ヘッダー END ----->
+
+   <!-- 前のページに戻る -->
+    <div class="top-rapper">
+      <button onclick="history.back()"><i class="fa fa-chevron-left" aria-hidden="true"></i> 戻る</button>
+    </div>
+
+   <!-- 検索／一覧画面 -->
+    <h2>検索／一覧</h2>
+    <button onclick="location.href='./touroku'"><i class="fa fa-plus" aria-hidden="true"></i> 新規登録</button>
+
+
+    <div class="container">
+    <form action="#" th:action="@{/search}" th:object="${ticket}" method="post">
+
+      <!-- 検索値１(題名) -->
+       <p>題名: <input style="width:95%" type="text" th:field="*{title}" /></p>
+
+      <!-- 検索値２(日付) -->
+       <p>作成日: <input type="date" th:field="*{regist_dt}" /></p>
+
+      <!-- 検索ボタン -->
+       <p><button type="submit"><i class="fa fa-search" aria-hidden="true"></i> 検索</button>
+          <!-- 検索条件リセットボタン -->
+          <input class="btn" type="reset" value="条件リセット">
+       </p>
+    </form>
+
+    <!-- 検索結果 -->
+    <!-- DB表示 -->
+     <table border="1" class="search">
+        <tr>
+            <th>チケットNo.</th>
+            <th>ステータス</th>
+            <th>タイトル</th>
+            <th>担当者</th>
+            <th>更新日</th>
+        </tr>
+        <tr th:each="emp : ${list}">
+            <td th:text="${emp.ticketNumber}"></td>
+            <td th:text="${emp.status}"></td>
+            <td><a th:text="${emp.title}" th:href="${'/shokai?id='	+ emp.ticketNumber}" ></a></td>
+            <td th:text="${emp.tanto}"></td>
+            <td th:text="${#dates.format(emp.registDt, 'yyyy/MM/dd')}"></td>
+        </tr>
+     </table>
+     </div>
+    <!-- 検索／一覧画面END -->
+
+  <!-- フッター -->
+  <footer>
+    <p>©ぴよぴよ</p>
+  </footer>
+  <!-- フッター END -->
+
+</body>
+</html>

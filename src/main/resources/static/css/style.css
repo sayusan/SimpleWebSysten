@@ -1,0 +1,183 @@
+/*----------------------------------------------------
+  ヘッダー
+----------------------------------------------------*/
+header{
+	background-color:#708090;
+	text-align:right;
+}
+/*ヘッダー文字*/
+header p{
+	color:white;
+	text-align:center;
+}
+
+
+/*----------------------------------------------------
+  ボディ
+----------------------------------------------------*/
+/*チケット部分*/
+.container{
+    padding: 0.5em 1em;
+    margin: 2em 0;
+    color: #474747;
+    background-color: #f3f3f3; /*背景色*/
+    border-left: double 7px  #89c3eb; /*左線*/
+    border-right: double 7px  #89c3eb; /*右線*/
+}
+/*背景色*/
+body{
+	background-color:#ffffff;
+}
+/*タイトル*/
+h2{
+	text-align:left;
+	font-family:sans-serif;
+    position: relative;
+    padding: 0.5em;
+    background: #89c3eb;
+    color: white;
+}
+/*タイトル折り返し部分*/
+h2::before {
+    position: absolute;
+    content: '';
+    top: 100%;
+    left: 0;
+    border: none;
+    border-bottom: solid 15px transparent;
+    border-right: solid 20px #84a2d4;
+}
+/*文字*/
+p {
+    font-family:sans-serif;
+    color:#4682b4;
+}
+
+
+/*----------------------------------------------------
+  テーブル（ログイン画面）
+----------------------------------------------------*/
+table{
+	text-align:center;
+	border-radius: 0.85em;
+	font-family:sans-serif;
+	color:white;
+	border-radius: 0.75em;
+	padding:0.5em;
+	border-color: #89c3eb;
+	border-width:5px;
+}
+
+th{
+    color:#89c3eb;
+    text-align:right;
+    background-color:white;
+    border:none;
+}
+
+td{
+    background-color:white;
+    border:none;
+
+}
+
+
+/*----------------------------------------------------
+  フッター
+----------------------------------------------------*/
+footer{
+	background-color:#708090;
+}
+
+footer p{
+	color:white;
+	text-align:center;
+	font-family:sans-serif;
+}
+
+
+/*----------------------------------------------------
+  ボタン
+----------------------------------------------------*/
+button{
+    display: inline-block;
+    padding: 0.3em 1em;
+    text-decoration: none;
+    color:  #89c3eb;
+    border: solid 2px  #89c3eb;
+    border-radius: 3px;
+    transition: .4s;
+}
+/*ボタンにポインタを置いたとき*/
+button:hover{
+    background:  #89c3eb;
+    color: white;
+}
+
+.btn {
+    display: inline-block;
+    padding: 0.3em 1em;
+    text-decoration: none;
+    color:  #89c3eb;
+    border: solid 2px #89c3eb;
+    border-radius: 3px;
+    transition: .4s;
+}
+
+.btn:hover{
+    background: #89c3eb;
+    color: white;
+}
+
+
+/*----------------------------------------------------
+  前のページに戻る
+----------------------------------------------------*/
+.top-rapper{
+    background-color:#778899;
+    padding:0,10px,0,0;
+}
+
+
+
+
+
+/*----------------------------------------------------
+  index.html（タブメニュー）のCSS
+----------------------------------------------------*/
+.area {
+    width: 500px;
+    margin: auto;
+    flex-wrap: wrap;
+    display: flex;
+}
+
+.tab_class {
+    width: calc(100%/5);
+    height: 50px;
+    background-color: darkgrey;
+    line-height: 50px;
+    font-size: 15px;
+    text-align: center;
+    display: block;
+    float: left;
+    order: -1;
+}
+
+input[name="tab_name"] {
+    display: none;
+}
+
+input:checked + .tab_class {
+    background-color: cadetblue;
+    color: aliceblue;
+}
+
+.content_class {
+    display: none;
+    width: 100%;
+}
+
+input:checked + .tab_class + .content_class {
+    display: block;
+}

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>タブさんぷる</title>
+    <link rel="stylesheet" media="all" th:href="@{/css/style.css}"/>
+    <meta charset="utf-8" />
+  </head>
+<body>
+
+  <!----- ヘッダー ----->
+    <header>
+     <p>Header</p>
+    </header>
+  <!----- ヘッダー END ----->
+
+  <div class="area">
+  <!-- タブ一つ目 -->
+    <input type="radio" name="tab_name" id="tab1" checked>
+    <label class="tab_class" for="tab1">新規登録</label>
+    <div class="content_class">
+      <p>
+         <!-- 登録画面 -->
+          <div class="container">
+          <h2>登録</h2>
+          <p>ステータス<br>
+           <select name="status">
+	       <option value="新規">新規</option>
+	       <option value="作業中">作業中</option>
+	       <option value="完了">完了</option>
+           </select>
+          </p>
+          <p>題名<br>
+           <input type="text" name="daimei" value="" size="24">
+          </p>
+          <p>説明<br>
+           <textarea name="comment" cols="40" rows="5"></textarea>
+          </p>
+          <p>担当者<br>
+           <select name="status">
+	       <option value="あああ">あああ</option>
+	       <option value="いいい">いいい</option>
+	       <option value="ううう">ううう</option>
+	       <option value="えええ">えええ</option>
+	       <option value="おおおおお">おおおおお</option>
+           </select>
+          </p>
+          <p>予定工数<br>
+           <input type="number" name="kousuu" value="" size="24">
+          </p>
+          </div>
+         <!-- 登録画面END -->
+
+         <!-- 登録確認ダイアログ表示 -->
+          <div align="right">
+           <input class ="btn" type="submit" value="登録" onClick="alert('登録しますか？');">
+          </div>
+     </div>
+    <!-- タブ一つ目END -->
+
+    <!-- タブ二つ目 -->
+    <input type="radio" name="tab_name" id="tab2" >
+    <label class="tab_class" for="tab2">照会</label>
+    <div class="content_class">
+      <p>
+        <!-- 照会画面 --><!-- 検索／一覧画面からの遷移先のためタブでなくてよい？ -->
+         <div class="container">
+         <h2>照会（要らないかも）</h2>
+         <div class="status">
+         <p>ステータス<br>
+          <select name="status">
+	      <option value="新規">新規</option>
+	      <option value="作業中">作業中</option>
+	      <option value="完了">完了</option>
+          </select>
+         </p>
+         <p>題名<br>
+          <input type="text" name="daimei" value="" size="24">
+         </p>
+         <p>説明<br>
+          <textarea name="comment" cols="40" rows="5"></textarea>
+         </p>
+         <p>
+          <input type="file" name="fl01">
+         </p>
+         <p>担当者<br>
+         <select name="status">
+	      <option value="あああ">あああ</option>
+	      <option value="いいい">いいい</option>
+	      <option value="ううう">ううう</option>
+	      <option value="えええ">えええ</option>
+	      <option value="おおおおお">おおおおお</option>
+         </select>
+         </p>
+         <p>予定工数<br>
+          <input type="text" name="kousuu" value="" size="24">
+         </p>
+         </div>
+         </div>
+        <!-- 照会画面END -->
+
+        <!-- 削除、更新してよいか確認するダイアログ表示 -->
+        <div align="right">
+         <input class ="btn" type="submit" value="削除" onClick="alert('削除してよろしいですか？');">
+         <input class ="btn" type="submit" value="更新" onClick="alert('更新してよろしいですか？');">
+        </div>
+    </div>
+    <!-- タブ二つ目END -->
+
+    <!-- タブ三つ目 -->
+    <input type="radio" name="tab_name" id="tab3" >
+    <label class="tab_class" for="tab3">検索／一覧</label>
+    <div class="content_class">
+      <p>
+       <!-- 検索画面 -->
+        <h2>検索</h2>
+       <!-- 検索値１(題名) -->
+        <p>題名<br>
+         <input type="text" name="title" size="24">
+        </p>
+
+       <!-- 検索値２(日付) -->
+        <p>作成日<br>
+         <input type="date" name="regist_dt" value="" size="24">
+        </p>
+
+       <!-- 検索ボタン -->
+        <input class ="btn" type="submit" name="search_button" value="検索" />
+        <br>
+
+       <!-- 検索結果 -->
+        <span th:text="${result}"></span>
+
+        <p th:text="'入力されたメッセージ：' + ${msg}"/>
+         <form action="#" th:action="@{/search}" method="POST">
+         <p>
+          <label for="message">メッセージ：</label>
+          <input id="message" name="msg" type="text" size="40" />
+         </p>
+         <p>
+          <input class ="btn" type="submit" value="送信" />
+         </p>
+        </form>
+
+       <!-- DB表示 -->
+        <table border="1">
+        <tr>
+            <th>題名</th>
+            <th>説明</th>
+            <th>作成日</th>
+        </tr>
+        <tr th:each="emp : ${list}">
+            <td th:text="${emp.title}"></td>
+            <td th:text="${emp.text}"></td>
+            <td th:text="${#dates.format(emp.registDt, 'yyyy/MM/dd')}"></td>
+        </tr>
+        </table>
+    </div>
+        <!-- 検索画面END -->
+    <!-- タブ三つ目END -->
+
+    <input type="radio" name="tab_name" id="tab4" >
+    <label class="tab_class" for="tab4">タブ4</label>
+    <div class="content_class">
+      <p>使うかわからない</p>
+    </div>
+    <input type="radio" name="tab_name" id="tab5" >
+    <label class="tab_class" for="tab5">タブ5</label>
+    <div class="content_class">
+      <p>使うかわからない</p>
+    </div>
+  </div>
+
+    <!-- フッター -->
+  <footer>
+    <p>footer</p>
+  </footer>
+  <!-- フッター END -->
+
+</body>
+</html>

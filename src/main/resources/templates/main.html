@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>メニュー</title>
+    <link rel="stylesheet" media="all" th:href="@{/css/style.css}"/>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <meta charset="utf-8" />
+  </head>
+  <body>
+  <!----- ヘッダー ----->
+    <header>
+        <div class="header-right">
+          <button onclick="location.href='./login'"><i class="fa fa-sign-out" aria-hidden="true"></i> ログアウト</button>
+        </div>
+    </header>
+  <!----- ヘッダー END ----->
+
+  <!-- 検索／一覧画面へ遷移 -->
+   <h2>メニュー</h2>
+   <div class="container">
+     <div align="center">
+       <input type="button" onclick="location.href='./search'" value="検索／一覧画面へ" class="btn">
+     </div>
+    </div>
+
+
+  <!-- フッター -->
+  <footer>
+    <p>©ぴよぴよ</p>
+  </footer>
+  <!-- フッター END -->
+
+
+  </body>
+</html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>照会</title>
+    <link rel="stylesheet" media="all" th:href="@{/css/style.css}"/>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <meta charset="utf-8" />
+
+    <!-- サブ画面を開くためのスクリプト -->
+    <script type ="text/javascript">
+    function disp(url){
+      // ticketNumberを渡す
+      var param = location.search
+      var param_url = url + param
+
+      // サブウインドウの設定
+      var subw = 800;   // サブウインドウの横幅
+      var subh = 600;   // サブウインドウの高さ
+      var subn = "編集画面（サブ）";   // サブウインドウの名称
+      // 表示座標の計算
+      var subx = ( screen.availWidth  - subw ) / 2;   // X座標
+      var suby = ( screen.availHeight - subh ) / 2;   // Y座標
+      // サブウインドウのオプション文字列を作る
+      var SubWinOpt = "width=" + subw + ",height=" + subh + ",top=" + suby + ",left=" + subx;
+      // サブウインドウを表示
+      window.open(param_url, "サブ検索画面", SubWinOpt);
+    }
+    </script>
+  </head>
+  <body>
+  <!----- ヘッダー ----->
+    <header>
+        <div class="header-right">
+          <button onclick="location.href='./main'"><i class="fa fa-home" aria-hidden="true"></i> メニューへ戻る</button>
+          <button onclick="location.href='./login'"><i class="fa fa-sign-out" aria-hidden="true"></i> ログアウト</button>
+        </div>
+    </header>
+  <!----- ヘッダー END ----->
+
+   <!-- 前のページに戻る -->
+    <div class="top-rapper">
+     <button onclick="history.back()"><i class="fa fa-chevron-left" aria-hidden="true"></i> 戻る</button>
+    </div>
+
+
+   <!-- 照会画面 -->
+     <h2>照会</h2>
+     <div class="container">
+
+        <!-- 照会情報 -->
+        <form action="#" th:action="@{/shokai}" th:object="${ticket}" id="shokaiForm" name="shokaiForm" method="post">
+
+          <input id="ticketNumber" th:field="*{ticketNumber}" type="hidden">
+          <input id="updateFlag" name="updateFlag" type="hidden">
+
+          <p><label><i class="fa fa-tasks" aria-hidden="true"></i> ステータス：</label>
+          <!-- <select id="status" name="status" th:field="*{status}" disabled="disabled">
+          </select> -->
+             <input id="s_status" th:field="*{status}" type="text" style="width:95%" name="status" size="24" disabled="disabled">
+          </p>
+          <p><label><i class="fa fa-lemon-o" aria-hidden="true"></i> 題名：</label>
+             <input id="s_daimei" th:field="*{title}" type="text" style="width:95%" name="daimei" size="24" disabled="disabled">
+          </p>
+          <p><i class="fa fa-comment" aria-hidden="true"></i> 説明<br>
+            <textarea id="s_setsumei" name="comment" th:field="*{text}" style="width:100%" cols="40" rows="5" disabled="disabled"></textarea>
+          </p>
+          <p>
+            <label><i class="fa fa-file" aria-hidden="true"></i> ファイル：</label>
+            <input id="s_file" type="file" name="fl01" disabled="disabled">
+          </p>
+          <p><label><i class="fa fa-user" aria-hidden="true"></i> 担当者：</label>
+          <!-- <select style="width:20%" id="tanto" name="status" th:field="*{tanto}" disabled="disabled">
+          </select> -->
+          <input id="s_tantou" type="text" name="tanto" th:field="*{tanto}" size="24" disabled="disabled">
+          </p>
+          <p><label><i class="fa fa-wrench" aria-hidden="true"></i> 予定工数：</label>
+            <input id="s_kousuu" type="text" name="kousuu" th:field="*{kosu}" size="24" disabled="disabled">
+          </p>
+        </form>
+        <!-- 照会情報END -->
+
+        <!-- 編集ボタンクリックでチケットを編集するサブ画面を開く -->
+         <div align="right">
+         <!-- TODO -->
+
+           <button onClick='disp("http://localhost:8080/hensyu")' type="submit"><i class="fa fa-pencil" aria-hidden="true"></i> 編集</button>
+
+          <!-- 削除、更新してよいか確認するダイアログ表示 -->
+           <button onclick="DeleteCheck();"><i class="fa fa-trash" aria-hidden="true"></i> 削除</button>
+           <script type="text/javascript">
+           <!--
+              // 確認ダイアログ表示
+              function DeleteCheck() {
+             if( confirm("削除してよろしいですか？") ) {
+               var param = location.search
+               var param_url = './delete' + param
+               alert('削除しました');
+               location.href=param_url;
+                }
+             else {
+
+                }
+              }
+            // -->
+           </script>
+           <button onclick="UpdateCheck();"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> 更新</button>
+           <script type="text/javascript">
+           <!--
+              // 確認ダイアログ表示
+              function UpdateCheck() {
+             if( confirm("更新してよろしいですか？") ) {
+               // disabled属性を削除
+               document.getElementById("s_status").removeAttribute("disabled");
+               document.getElementById("s_daimei").removeAttribute("disabled");
+               document.getElementById("s_setsumei").removeAttribute("disabled");
+               document.getElementById("s_file").removeAttribute("disabled");
+               document.getElementById("s_tantou").removeAttribute("disabled");
+               document.getElementById("s_kousuu").removeAttribute("disabled");
+
+               // updateFlagを設定
+               document.getElementById('updateFlag').value = "1";
+
+               // submitでFormの値を送信
+               document.forms.shokaiForm.submit();
+                }
+             else {
+
+                }
+              }
+            // -->
+           // -->
+           </script>
+            </div>
+     </div>
+   <!-- 照会画面END -->
+
+  <!-- フッター -->
+  <footer>
+    <p>©ぴよぴよ</p>
+  </footer>
+  <!-- フッター END -->
+
+
+  </body>
+</html>
